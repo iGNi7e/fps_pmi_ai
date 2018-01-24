@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 107
+  controlID: 106
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -415,7 +415,7 @@ MonoBehaviour:
     height: 544
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 58010000
+    m_SelectedIDs: 12070000
     m_LastClickedID: 0
     m_ExpandedIDs: 1afcffff00000000
     m_RenameOverlay:
@@ -497,9 +497,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.21090935, y: -0.6697473, z: 0.20743743, w: -0.681171}
+    m_Target: {x: -0.22858843, y: -0.07434291, z: 0.017539475, w: -0.97055805}
     speed: 2
-    m_Value: {x: 0.21090935, y: 0.6697473, z: -0.20743743, w: 0.681171}
+    m_Value: {x: -0.22858042, y: -0.0743403, z: 0.01753886, w: -0.970524}
   m_Size:
     m_Target: 34.90685
     speed: 2
@@ -620,18 +620,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\iGNiTe\Documents\GitHub\fps_pmi_ai\FPSS
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: 7c260000
-    m_LastClickedID: 9852
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 8e280000
+    m_LastClickedID: 10382
     m_ExpandedIDs: 000000007c2600009a260000ac26000012270000da270000002900008a2900009829000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 6a1c00007651ffffc882feff3a2400008487ffff4c8bffff803b0000ba2400008e240000b62400008c240000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -795,7 +795,7 @@ MonoBehaviour:
     y: 107
     width: 359
     height: 842
-  m_ScrollPosition: {x: 0, y: 0}
+  m_ScrollPosition: {x: 0, y: 21.955078}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 202
