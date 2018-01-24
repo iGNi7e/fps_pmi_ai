@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField]
     private Camera cam;
+    [SerializeField]
+    private float cameraRotationLimit = 85f;
+
+    private float currentCamRotationX = 0f;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
-    private Vector3 rotationCamera = Vector3.zero;
+    private float rotationCameraX = 0;
+    private Vector3 thrusterForce = Vector3.zero;
 
     private Rigidbody rb;
 
@@ -24,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 		
 	}
 
-    //Get a movement vector
+    // Get a movement vector
     public void Move(Vector3 _velocity)
     {
         velocity = _velocity;
@@ -33,12 +36,17 @@ public class PlayerMovement : MonoBehaviour {
     {
         rotation = _rotation;
     }
-    public void RotateCamera(Vector3 _rotationCamera)
+    public void RotateCamera(float _rotationCameraX)
     {
-        rotationCamera = _rotationCamera;
+        rotationCameraX = _rotationCameraX;
+    }
+    // Get a force vector for our player
+    public void ApplyThruster(Vector3 _thrusterForce)
+    {
+        thrusterForce = _thrusterForce;
     }
 
-    //Run every physics iteration
+    // Run every physics iteration
     private void FixedUpdate()
     {
         PerformMovement();
@@ -47,9 +55,13 @@ public class PlayerMovement : MonoBehaviour {
 
     void PerformMovement()
     {
-        if(velocity != Vector3.zero)
+        if (velocity != Vector3.zero)
         {
             rb.MovePosition(rb.transform.position + velocity * Time.fixedDeltaTime);
+        }
+        if (thrusterForce != Vector3.zero)
+        {
+            rb.AddForce(thrusterForce * Time.fixedDeltaTime, ForceMode.Acceleration);
         }
     }
 
@@ -61,7 +73,9 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (cam != null)
         {
-            cam.transform.Rotate(rotationCamera);
+            currentCamRotationX += rotationCameraX;
+            currentCamRotationX = Mathf.Clamp(currentCamRotationX, -cameraRotationLimit, cameraRotationLimit);
+            cam.transform.localEulerAngles = new Vector3(currentCamRotationX, 0f, 0f);
         }
     }
     
