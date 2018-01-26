@@ -11,6 +11,15 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     string remoteLayerName = "RemotePlayer"; //Слой других игроков
 
+    [SerializeField]
+    string dontDrawLayerName = "DontDraw"; //Слой, который не будет прорисовываться камерой игрока
+    [SerializeField]
+    GameObject playerGraphics;
+
+    [SerializeField]
+    GameObject playerUIPrefab;
+    private GameObject playerUIInstance;
+
     void Start()
     {
         if (!isLocalPlayer)
@@ -23,8 +32,23 @@ public class PlayerSetup : NetworkBehaviour
             sceneCam = Camera.main;
             if (sceneCam != null)
                 sceneCam.gameObject.SetActive(false); //Выключение MainCamera(камера с видом на сцену)
+
+            SetLayerRecursively(playerGraphics,LayerMask.NameToLayer(dontDrawLayerName)); //Выключение графики слоя DontDraw
+
+            playerUIInstance = Instantiate(playerUIPrefab); //Создаём PlayerUI
+            playerUIInstance.name = playerUIPrefab.name;
         }
         GetComponent<Player>().Setup();
+    }
+
+    void SetLayerRecursively(GameObject obj,LayerMask newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject,newLayer);
+        }
     }
 
     public override void OnStartClient() //Вызов при подключении к хосту
@@ -38,6 +62,7 @@ public class PlayerSetup : NetworkBehaviour
 
     void OnDisable()
     {
+        Destroy(playerUIInstance);
         if (sceneCam != null)
         {
             sceneCam.gameObject.SetActive(true);
