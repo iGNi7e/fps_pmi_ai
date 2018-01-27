@@ -52,17 +52,52 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
 
+    //Вызывается на сервере при стрельбе
+    [Command]
+    void CmdOnShoot()
+    {
+        RpcDoShootEffect();
+    }
+
+    //Вызывается на Всех клиентах, когда нужно вызвать эффект
+    [ClientRpc]
+    void RpcDoShootEffect()
+    {
+        weaponManager.GetCurrentWeaponGraphics().muzzleFlash.Play();
+    }
+
+    [Command]
+    void CmdOnHit(Vector3 _pos, Vector3 _normal)
+    {
+        RpcDoHitEffect(_pos, _normal);
+    }
+
+    [ClientRpc]
+    void RpcDoHitEffect(Vector3 _pos, Vector3 _normal)
+    {
+        GameObject _hitEffect = (GameObject)Instantiate(weaponManager.GetCurrentWeaponGraphics().hitEffectPrefab, 
+            _pos, Quaternion.LookRotation(_normal));
+        Destroy(_hitEffect, 1f);
+    }
+
     [Client] // Команды только для клиента
     void Shoot()
     {
-        Debug.Log("SHOOT!!!1!11!");
+
+        if (!isLocalPlayer)
+            return;
+
+        CmdOnShoot();
+
         RaycastHit _hit;
-        if (Physics.Raycast(cam.transform.position,cam.transform.forward,out _hit,currentWeapon.range,mask))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, currentWeapon.range, mask))
         {
-           if (_hit.collider.tag == PLAYER_TAG)
+            if (_hit.collider.tag == PLAYER_TAG)
             {
                 CmdPlayerShoot(_hit.collider.name,currentWeapon.damage);
             }
+
+            CmdOnHit(_hit.point, _hit.normal);
         }
     }
 

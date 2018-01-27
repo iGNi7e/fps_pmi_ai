@@ -193,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1601271099946572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.975513, y: 0.318, z: -6.3220897}
+  m_LocalPosition: {x: -21.539633, y: -0.8999999, z: 5.435317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4822988295274032}
@@ -343,7 +343,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -356,11 +356,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!20 &20407048173515268
 Camera:
   m_ObjectHideFlags: 1
@@ -377,7 +377,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -392,11 +392,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!23 &23078247051240128
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -406,6 +406,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -421,6 +422,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -438,6 +440,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -453,6 +456,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -470,6 +474,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -485,6 +490,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -502,6 +508,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -517,6 +524,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -690,6 +698,13 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 114814248138230714}
   - {fileID: 114520041184725374}
+  disableGameObjectsOnDeath:
+  - {fileID: 1050299699195294}
+  - {fileID: 1292647548766426}
+  deathEffect: {fileID: 1296408611382076, guid: b22c9536135a04e4c93bc5ae1b63cdc4,
+    type: 2}
+  spawnEffect: {fileID: 1315815989756128, guid: 4e6047f8e85f9d943b7cab4099f77a15,
+    type: 2}
 --- !u!114 &114649634147022082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -719,13 +734,13 @@ MonoBehaviour:
   - {fileID: 114649634147022082}
   - {fileID: 20407048173515268}
   - {fileID: 81001155898828206}
-  - {fileID: 114520041184725374}
   - {fileID: 20314170324492174}
   remoteLayerName: RemotePlayer
   dontDrawLayerName: DontDraw
   playerGraphics: {fileID: 1050299699195294}
   playerUIPrefab: {fileID: 1454033511152682, guid: 775fb5f0074a05b4baeeac80edf577f9,
     type: 2}
+  playerUIInstance: {fileID: 0}
 --- !u!114 &114814248138230714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -758,7 +773,7 @@ MonoBehaviour:
     name: Glock
     damage: 10
     range: 100
-    fireRate: 100
+    fireRate: 10
     graphics: {fileID: 1171452942984666, guid: 515b78d88ac60a946ae0d03a1a48d4fc, type: 2}
   weaponHolder: {fileID: 4632976143694290}
 --- !u!124 &124802108776741654
@@ -790,7 +805,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -8.975513, y: 1.318, z: -6.3220897}
+  m_ConnectedAnchor: {x: -24.09797, y: 0.10000008, z: 4.1750956}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
