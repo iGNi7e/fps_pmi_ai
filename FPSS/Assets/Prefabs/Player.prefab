@@ -694,6 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0da3de8d0f6bac4aaedc086a007d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDead: 0
   maxHealth: 100
   disableOnDeath:
   - {fileID: 114814248138230714}
@@ -752,9 +753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bdb3aeea66a534da58b7ef79f49b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   sensivity: 2
-  thrusterForce: 1500
+  thrusterForce: 1750
   jointSpring: 20
   jointMaxForce: 40
 --- !u!114 &114816308343672444

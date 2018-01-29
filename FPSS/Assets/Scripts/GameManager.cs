@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance!=null)
+        if (instance != null)
         {
             Debug.LogError("More than one GameManager in scene!");
         }

@@ -34,7 +34,14 @@ public class PlayerSetup : NetworkBehaviour
 
             playerUIInstance = Instantiate(playerUIPrefab); //Создаём PlayerUI
             playerUIInstance.name = playerUIPrefab.name;
+
+            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+            ui.SetPlayer(GetComponent<Player>());
+
             GetComponent<Player>().SetupPlayer();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
@@ -64,7 +71,10 @@ public class PlayerSetup : NetworkBehaviour
         if (isLocalPlayer)
             GameManager.instance.SetSceneCameraActive(true);
 
-        GameManager.UnRegisterPlayer(transform.name); 
+        GameManager.UnRegisterPlayer(transform.name);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void DisableComponents()

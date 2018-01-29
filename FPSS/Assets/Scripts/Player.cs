@@ -5,6 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(PlayerSetup))]
 public class Player : NetworkBehaviour
 {
+    [SerializeField]
     private bool _isDead = false;
     public bool isDead
     {
@@ -32,6 +33,8 @@ public class Player : NetworkBehaviour
     private GameObject spawnEffect;
 
     private bool firstSetup = true;
+
+    private bool cursorOn = true;
 
     public void SetupPlayer()
     {
@@ -88,17 +91,35 @@ public class Player : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
             RpcTakeDamage(1009);
+
+        if (Input.GetKeyDown(KeyCode.L))
+            RpcTakeDamage(20);
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (!cursorOn)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            cursorOn = !cursorOn;
+        }
     }
 
     [ClientRpc]
     public void RpcTakeDamage(int _amount)
     {
-        if (isDead) return;
+        if (_isDead) return;
 
         currentHelth -= _amount;
         Debug.Log(transform.name + " now has " + currentHelth + " health");
 
-        if (currentHelth <= 0)
+        if (currentHelth <= 0 && !_isDead)
         {
             Die();
         }
@@ -106,7 +127,7 @@ public class Player : NetworkBehaviour
 
     void Die()
     {
-        isDead = true;
+        _isDead = true;
 
         //Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
@@ -142,7 +163,7 @@ public class Player : NetworkBehaviour
 
     public void SetDefaults()
     {
-        isDead = false;
+        _isDead = false;
 
         currentHelth = maxHealth;
 
@@ -166,5 +187,10 @@ public class Player : NetworkBehaviour
         //Create a spawn effect
         GameObject _gfxInst = Instantiate(spawnEffect, transform.position, Quaternion.identity);
         Destroy(_gfxInst, 3f);
+    }
+
+    public float GetHealthPct()
+    {
+        return (float)currentHelth / maxHealth;
     }
 }
